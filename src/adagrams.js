@@ -101,7 +101,7 @@ const Adagrams = {
       "Z"
     ];
     // Implement this method for wave 1
-    let hand = [];
+    const hand = [];
     let tilesDrawn = 0;
     // let rand = letterPool[Math.floor(Math.random() * letterPool.length)];
     while (tilesDrawn < 10) {
@@ -112,21 +112,49 @@ const Adagrams = {
       hand.push(rand);
       tilesDrawn++;
     }
-
     return hand;
-  }
+  },
+  //   usesAvailableLetters(word, drawnLetters) {
+  //     const letters = word.split("");
+  //     const drawnCopy = drawnLetters.slice(0); // Create a copy of the drawn letters which we can modify
+  //
+  //     return letters.every(letter => {
+  //       const index = drawnCopy.indexOf(letter);
+  //       if (index === -1) return false;
+  //
+  //       delete drawnCopy[index];
+  //       return true;
+  //     });
+  //   }
+  // };
+  usesAvailableLetters(input, hand) {
+    const availableLetters = input.split("");
+    const handCopy = hand.slice(0);
+    console.log(hand);
+    console.log(input);
+    return availableLetters.every(letter => {
+      const index = handCopy.indexOf(letter);
+      if (index === -1) return false;
 
-  // usesAvailableLetters(input, letterInHand){
-  //   newLetters = letterInHand.map(letter)
-  //   input.split("").forEach(letter);
-  //   if (!newLetters).includes(letter)
-  //   return false
-  //   else if newLetters.includes(letter);
-  //   index = newLetters.findIndex(letter);
-  //   newLetters.deleteAt(index)
-  // },
-  // return true
+      delete handCopy[index];
+      return true;
+    });
+  }
 };
 
-// Do not remove this line or your tests will break!
+// if (!availableLetters.includes(input.split())) { //make this a forEach ??
+//   console.log("choose a different word");
+//   console.log("We hit 2");
+//   return false;
+// } else {
+// console.log("We hit 1");
+// if (availableLetters.includes(input.split().toUpperCase()));
+// {
+//   let index = availableLetters.findIndex(input);
+//   {
+//     availableLetters.deleteAt(index);
+//     console.log("Good play");
+//   }
+// }
+
 export default Adagrams;
