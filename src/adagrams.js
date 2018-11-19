@@ -1,4 +1,45 @@
 const Adagrams = {
+  // LETTER_COUNTS: {
+  //   1: "JKQXZ",
+  //   2: "BCFHMPVWY",
+  //   3: "G",
+  //   4: "DLSU",
+  //   6: "NRT",
+  //   8: "O",
+  //   9: "AI",
+  //   12: "E"
+  // },
+
+  SCORE_CHART: {
+    A: 1,
+    E: 1,
+    I: 1,
+    O: 1,
+    U: 1,
+    L: 1,
+    N: 1,
+    R: 1,
+    S: 1,
+    T: 1,
+    D: 2,
+    G: 2,
+    B: 3,
+    C: 3,
+    M: 3,
+    P: 3,
+    F: 4,
+    H: 4,
+    V: 4,
+    W: 4,
+    Y: 4,
+    K: 5,
+    J: 8,
+    X: 8,
+    Q: 10,
+    Z: 10
+  },
+
+  LENGTH_BONUS: 8,
   drawLetters() {
     let letterPool = [
       "A",
@@ -100,6 +141,36 @@ const Adagrams = {
       "Y",
       "Z"
     ];
+    //   SCORE_CHART: {
+    //     A: 1,
+    //     E: 1,
+    //     I: 1,
+    //     O: 1,
+    //     U: 1,
+    //     L: 1,
+    //     N: 1,
+    //     R: 1,
+    //     S: 1,
+    //     T: 1,
+    //     D: 2,
+    //     G: 2,
+    //     B: 3,
+    //     C: 3,
+    //     M: 3,
+    //     P: 3,
+    //     F: 4,
+    //     H: 4,
+    //     V: 4,
+    //     W: 4,
+    //     Y: 4,
+    //     K: 5,
+    //     J: 8,
+    //     X: 8,
+    //     Q: 10,
+    //     Z: 10,
+    //
+    //     LENGTH_BONUS: 8
+    //   };
     // Implement this method for wave 1
     const hand = [];
     let tilesDrawn = 0;
@@ -138,38 +209,48 @@ const Adagrams = {
       delete handCopy[index];
       return true;
     });
-  }
-};
- scoreWord(word)
-  wordScore = 0
-  letters = word.split("").toUpperCase;
-  for(letter of letters){
+  },
 
-  switch (letter) {
-    case "A", "E", "I", "O", "U", "L", "N", "R", "S", "T":
-    wordScore += 1
-    break;
-    case "D", "G":
-    wordScore += 2
-    break;
-    case "B", "C", "M", "P":
-    wordScore += 3
-    break;
-    case "F", "H", "V", "W", "Y":
-    wordScore += 4
-    break;
-    case "K":
-    wordScore += 5
-    case "J", "X":
-    wordScore += 8
-    break;
-    case "Q", "Z":
-    wordScore += 10
-    break;
-    default:
-    console.log("That is not a letter.");
+  scoreWord(word) {
+    return word
+      .toUpperCase()
+      .split("")
+      .reduce((wordScore, letter) => {
+        const letterScore = Adagrams.scoreCHART[letter];
+        if (letterScore === undefined) {
+          throw `${letter} is not in the English alphabet!`;
+        }
+
+        return wordScore + letterScore;
+      }, word.length < 7 ? 0 : Adagrams.LENGTH_BONUS);
+  }
+
+  // switch (letters) {
+  //   case ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T"):
+  //     wordScore += 1;
+  //     break;
+  //   case ("D", "G"):
+  //     wordScore += 2;
+  //     break;
+  //   case ("B", "C", "M", "P"):
+  //     wordScore += 3;
+  //     break;
+  //   case ("F", "H", "V", "W", "Y"):
+  //     wordScore += 4;
+  //     break;
+  //   case "K":
+  //     wordScore += 5;
+  //     break;
+  //   case ("J", "X"):
+  //     wordScore += 8;
+  //     break;
+  //   case ("Q", "Z"):
+  //     wordScore += 10;
+  //     break;
+  //   default:
+  //     console.log("That is not a letter.");
+  //     return wordScore
   // word_score += 8 if(7..10).includes?(word.length);
-  return word_score;
-}}}
+};
 
 export default Adagrams;
