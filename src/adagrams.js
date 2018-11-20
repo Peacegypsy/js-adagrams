@@ -1,45 +1,4 @@
 const Adagrams = {
-  // LETTER_COUNTS: {
-  //   1: "JKQXZ",
-  //   2: "BCFHMPVWY",
-  //   3: "G",
-  //   4: "DLSU",
-  //   6: "NRT",
-  //   8: "O",
-  //   9: "AI",
-  //   12: "E"
-  // },
-
-  SCORE_CHART: {
-    A: 1,
-    E: 1,
-    I: 1,
-    O: 1,
-    U: 1,
-    L: 1,
-    N: 1,
-    R: 1,
-    S: 1,
-    T: 1,
-    D: 2,
-    G: 2,
-    B: 3,
-    C: 3,
-    M: 3,
-    P: 3,
-    F: 4,
-    H: 4,
-    V: 4,
-    W: 4,
-    Y: 4,
-    K: 5,
-    J: 8,
-    X: 8,
-    Q: 10,
-    Z: 10
-  },
-
-  LENGTH_BONUS: 8,
   drawLetters() {
     let letterPool = [
       "A",
@@ -171,15 +130,12 @@ const Adagrams = {
     //
     //     LENGTH_BONUS: 8
     //   };
-    // Implement this method for wave 1
+
     const hand = [];
     let tilesDrawn = 0;
-    // let rand = letterPool[Math.floor(Math.random() * letterPool.length)];
+
     while (tilesDrawn < 10) {
-      // for (let i = 0; i < 10; i++) {
       let rand = letterPool[Math.floor(Math.random() * letterPool.length)];
-      // if (rand > 0);
-      // rand -= 1;
       hand.push(rand);
       tilesDrawn++;
     }
@@ -210,7 +166,36 @@ const Adagrams = {
       return true;
     });
   },
+  SCORE_CHART: {
+    A: 1,
+    E: 1,
+    I: 1,
+    O: 1,
+    U: 1,
+    L: 1,
+    N: 1,
+    R: 1,
+    S: 1,
+    T: 1,
+    D: 2,
+    G: 2,
+    B: 3,
+    C: 3,
+    M: 3,
+    P: 3,
+    F: 4,
+    H: 4,
+    V: 4,
+    W: 4,
+    Y: 4,
+    K: 5,
+    J: 8,
+    X: 8,
+    Q: 10,
+    Z: 10
+  },
 
+  LENGTH_BONUS: 8,
   scoreWord(word) {
     return word
       .toUpperCase()
