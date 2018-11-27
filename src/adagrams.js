@@ -201,41 +201,111 @@ const Adagrams = {
       .toUpperCase()
       .split("")
       .reduce((wordScore, letter) => {
-        const letterScore = Adagrams.scoreCHART[letter];
+        const letterScore = Adagrams.SCORE_CHART[letter];
         if (letterScore === undefined) {
           throw `${letter} is not in the English alphabet!`;
         }
 
         return wordScore + letterScore;
       }, word.length < 7 ? 0 : Adagrams.LENGTH_BONUS);
-  }
+  },
+  //
+  // def highest_score_from(words)
+  //   best_word = {word: nil, score: 0}
+  //   words.each do |word|
+  //     if score_word(word) > best_word[:score]
+  //       best_word[:score] = score_word(word)
+  //       best_word[:word] = word
+  //     elsif score_word(word) == best_word[:score]
+  //       if word.length == 10 && best_word[:word].length != 10
+  //         best_word[:word] = word
+  //       elsif word.length < best_word[:word].length && best_word[:word].length != 10
+  //         best_word[:word] = word
+  //       end
+  //     end
+  //   end
+  //   best_word
+  // end
 
-  // switch (letters) {
-  //   case ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T"):
-  //     wordScore += 1;
-  //     break;
-  //   case ("D", "G"):
-  //     wordScore += 2;
-  //     break;
-  //   case ("B", "C", "M", "P"):
-  //     wordScore += 3;
-  //     break;
-  //   case ("F", "H", "V", "W", "Y"):
-  //     wordScore += 4;
-  //     break;
-  //   case "K":
-  //     wordScore += 5;
-  //     break;
-  //   case ("J", "X"):
-  //     wordScore += 8;
-  //     break;
-  //   case ("Q", "Z"):
-  //     wordScore += 10;
-  //     break;
-  //   default:
-  //     console.log("That is not a letter.");
-  //     return wordScore
-  // word_score += 8 if(7..10).includes?(word.length);
+  highestScoreFrom(words) {
+    const highWord = {
+      word: null,
+      score: 0
+    };
+    words.sort(function(a, b) {
+      return a.length - b.length;
+    });
+    words.forEach(word => {
+      let score = this.scoreWord(word);
+      if (score > highWord.score) {
+        highWord.score = score;
+        highWord.word = word;
+      } else if (
+        score === highWord.score &&
+        word.length === 10 &&
+        highWord.word.length < 10
+      ) {
+        highWord.score = score;
+        highWord.word = word;
+      }
+    });
+    return highWord;
+  }
 };
+// ***********************************
+//   def score_word(word)
+//   word_score = 0
+//
+//   word.split("").each do |letter|
+//     letter = letter.upcase.to_sym
+//     case letter
+//     when :A, :E, :I, :O, :U, :L, :N, :R, :S, :T
+//       word_score += 1
+//     when :D, :G
+//       word_score += 2
+//     when :B, :C, :M, :P
+//       word_score += 3
+//     when :F, :H, :V, :W, :Y
+//       word_score += 4
+//     when :K
+//       word_score += 5
+//     when :J, :X
+//       word_score += 8
+//     when :Q, :Z
+//       word_score += 10
+//     end
+//   end
+//
+//   word_score += 8 if (7..10).includes(word.length)
+//
+//   return word_score
+// end
+// *************************************
+// switch (letters) {
+//   case ("A", "E", "I", "O", "U", "L", "N", "R", "S", "T"):
+//     wordScore += 1;
+//     break;
+//   case ("D", "G"):
+//     wordScore += 2;
+//     break;
+//   case ("B", "C", "M", "P"):
+//     wordScore += 3;
+//     break;
+//   case ("F", "H", "V", "W", "Y"):
+//     wordScore += 4;
+//     break;
+//   case "K":
+//     wordScore += 5;
+//     break;
+//   case ("J", "X"):
+//     wordScore += 8;
+//     break;
+//   case ("Q", "Z"):
+//     wordScore += 10;
+//     break;
+//   default:
+//     console.log("That is not a letter.");
+//     return wordScore
+// word_score += 8 if(7..10).includes?(word.length);
 
 export default Adagrams;
